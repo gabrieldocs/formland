@@ -11,8 +11,9 @@ export type billboardType = {
 type PropsBillboardContext = {
     state: billboardType;
     setState: React.Dispatch<React.SetStateAction<billboardType>>;
-    updateRandomQuote: () => any;
+    updateRandomQuote: () => void;
     saveFavoriteQuote: () => void;
+    deleteFavoriteQuote: () => void;
 };
 
 const DEFAULT_VALUE: PropsBillboardContext = {
@@ -25,6 +26,7 @@ const DEFAULT_VALUE: PropsBillboardContext = {
     setState: () => {},
     updateRandomQuote: () => {},
     saveFavoriteQuote: () => null,
+    deleteFavoriteQuote: () => null,
 }
 
 export const BillboardContext = createContext<PropsBillboardContext>(DEFAULT_VALUE);
@@ -70,12 +72,18 @@ export const BillboardContextProvider: React.FC = ({ children })=> {
         const favorite = JSON.stringify(state);
         localStorage.setItem("@app:favorite:quote", favorite);
     }
+
+    function deleteFavoriteQuote(): void {
+        localStorage.removeItem("@app:favorite:quote");
+    }
+
     return (
         <BillboardContext.Provider value={{
             state,
             setState,
             updateRandomQuote,
             saveFavoriteQuote,
+            deleteFavoriteQuote,
         }}>
         {children}
     </BillboardContext.Provider>)
