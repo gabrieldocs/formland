@@ -1,7 +1,6 @@
 import React, {memo} from "react";
-import {useBillboardContext} from "./billboard.context";
 import {Box, Button, ButtonGroup, Container, Snackbar, Typography} from "@mui/material";
-
+import {useBillboardContext} from "./hooks/useBillboard";
 function BillboardView() : React.ReactElement {
     const { state, updateRandomQuote, saveFavoriteQuote, deleteFavoriteQuote } = useBillboardContext();
     return(

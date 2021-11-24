@@ -1,20 +1,6 @@
-import React, {createContext, useContext, useEffect, useState} from "react";
+import React, {createContext, useEffect, useState} from "react";
 import {getRandomQuote} from "./billboard.service";
-
-export type billboardType = {
-  id: string|number|null;
-  title: string|null;
-  caption: string|null;
-  content: string|null;
-};
-
-type PropsBillboardContext = {
-    state: billboardType;
-    setState: React.Dispatch<React.SetStateAction<billboardType>>;
-    updateRandomQuote: () => void;
-    saveFavoriteQuote: () => void;
-    deleteFavoriteQuote: () => void;
-};
+import {PropsBillboardContext} from "./models/BillboardPropsType";
 
 const DEFAULT_VALUE: PropsBillboardContext = {
     state: {
@@ -88,8 +74,3 @@ export const BillboardContextProvider: React.FC = ({ children })=> {
         {children}
     </BillboardContext.Provider>)
 }
-
-export const useBillboardContext = () => {
-    return useContext(BillboardContext);
-}
-
